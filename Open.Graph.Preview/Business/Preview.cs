@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Open.Graph.Preview.Models;
 using OpenGraphNet;
 
 namespace Open.Graph.Preview.Business
