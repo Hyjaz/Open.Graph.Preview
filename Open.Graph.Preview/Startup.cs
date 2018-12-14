@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace Open.Graph.Preview
 {
@@ -25,6 +26,11 @@ namespace Open.Graph.Preview
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSwaggerGen(opt => opt.SwaggerDoc("v1", new Info
+            {
+                Title = "Preview",
+                Version = "V1"
+            }));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -40,6 +46,12 @@ namespace Open.Graph.Preview
                 app.UseHsts();
             }
 
+            app.UseSwagger(opt => opt.RouteTemplate = "{documentName}/swagger.json");
+            app.UseSwaggerUI(opt =>
+            {
+                opt.RoutePrefix = string.Empty;
+                opt.SwaggerEndpoint("v1/swagger.json", "Preview");
+            });
             app.UseHttpsRedirection();
             app.UseMvc();
         }
