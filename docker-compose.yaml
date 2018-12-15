@@ -1,0 +1,6 @@
+version : "3"
+services:
+  server:
+    build: ./Open.Graph.Preview
+    ports:
+     - "44371:44371"

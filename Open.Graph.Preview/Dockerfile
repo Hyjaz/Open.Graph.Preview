@@ -3,6 +3,7 @@ WORKDIR /app
 
 EXPOSE 65520
 EXPOSE 44371
+ENV ASPNETCORE_URLS=http://+:44371
 
 FROM microsoft/dotnet:2.1-sdk AS build
 WORKDIR "/Open.Graph.Preview"
